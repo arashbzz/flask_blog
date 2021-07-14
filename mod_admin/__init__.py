@@ -1,11 +1,7 @@
 from flask import Blueprint
 
-
 admin = Blueprint('admin', __name__, url_prefix='/admin/')
 
+from mod_admin.views import index
 
 
-
-@admin.route('/')
-def admin_index():
-    return 'Hekko from admin Index'
