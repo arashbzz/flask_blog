@@ -11,11 +11,12 @@ from .utils import admin_only_viwe
 @admin.route('/')
 @admin_only_viwe
 def index():
-    return 'here id dmin page'
+    return 'here is admin page'
 
 @admin.route('/login',methods=['POST','GET'])
 def login():
     form = Login_form(request.form)
+    
     if request.method == 'POST':
         if not form.validate_on_submit :
             abort(400)
@@ -33,6 +34,7 @@ def login():
         session['email']= user.email
         session ['id'] =user.id
         session['role'] = user.role
+        print (session)
         return 'loged sucssecfully'
     if session.get('role') ==1:
         return 'you have already login'

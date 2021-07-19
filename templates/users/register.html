@@ -1,0 +1,57 @@
+{%extends 'base.html'%}
+
+{%block title%}
+    register
+{%endblock%}
+
+{%block content%}
+    
+
+
+    <h1>Register</h1>
+    <form action="{{url_for('users.register')}}" method="POST">
+        {{form.hidden_tag()}}
+        {%with messages =get_flashed_messages() %}
+        {%if messages %}
+            <p>{{messages}}</p>
+        {%endif%}
+    {%endwith%}
+       full name:           {{form.full_name}} <br>
+       {%if form.full_name.errors%}
+       <ul>
+           {%for errors in form.full_name.errors%}
+           <li>{{errors}}</li>
+           {%endfor%}
+       </ul>
+       {%endif%}
+
+       email:               {{form.email}} <br>
+       {%if form.email.errors%}
+       <ul>
+           {%for errors in form.email.errors%}
+           <li>{{errors}}</li>
+           {%endfor%}
+       </ul>
+       {%endif%}
+
+       password:            {{form.password}} <br>
+       {%if form.password.errors%}
+       <ul>
+           {%for errors in form.password.errors%}
+           <li>{{errors}}</li>
+           {%endfor%}
+       </ul>
+       {%endif%}
+
+       confirmed password:  {{form.confirm_password}} <br>
+       {%if form.confirm_password.errors%}
+       <ul>
+           {%for errors in form.confirm_password.errors%}
+           <li>{{errors}}</li>
+           {%endfor%}
+       </ul>
+       {%endif%}
+       <input type="submit" >
+    </form>
+
+{%endblock%}
