@@ -1,5 +1,6 @@
 from os import error
-from flask import session, render_template, request, abort, flash
+import re
+from flask import session, render_template, request, abort, flash,redirect,url_for
 from werkzeug.security import check_password_hash
 from . import admin
 from app import db
@@ -11,12 +12,11 @@ from .utils import admin_only_viwe
 @admin.route('/')
 @admin_only_viwe
 def index():
-    return 'here is admin page'
+    return render_template('/admin/index.html')
 
 @admin.route('/login',methods=['POST','GET'])
 def login():
     form = Login_form(request.form)
-    
     if request.method == 'POST':
         if not form.validate_on_submit :
             abort(400)
@@ -35,7 +35,14 @@ def login():
         session ['id'] =user.id
         session['role'] = user.role
         print (session)
-        return 'loged sucssecfully'
+        return redirect(url_for('admin.index'))
     if session.get('role') ==1:
-        return 'you have already login'
+        return redirect(url_for('admin.index'))
     return render_template('admin/login_template.html',form = form)
+
+@admin.route('/logout')
+@admin_only_viwe
+def logout():
+    session.clear()
+    flash ('you logout successfully.', 'warning')
+    return redirect (url_for('admin.login'))
