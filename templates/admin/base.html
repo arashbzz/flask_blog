@@ -2,9 +2,17 @@
 
 {% block content %}
 <ul> 
-    <li> <a href="{{url_for('admin.index')}}"> Dashboard </li>
-    <li> <a href="{{ url_for('admin.logout')}}">  Logout </li> 
+    <li> <a href="{{url_for('admin.index')}}"> Dashboard </a>   </li>
+        <li> <a href="{{url_for ('admin.create_post')}}"> Add new post </a> </li>
+    <li> <a href="{{ url_for('admin.logout')}}">  Logout </a> </li> 
 </ul>
+
+{%with messages =get_flashed_messages() %}
+{%if messages %}
+    <p>{{messages}}</p>
+{%endif%}
+{%endwith%}
+
 {% block page_content %}
 
 {% endblock %}

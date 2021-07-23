@@ -1,0 +1,19 @@
+{% extends 'admin/base.html' %}
+
+{% block page_content %}
+
+<h1>
+hello it is page for adding blogs.
+</h1>
+
+<form action="{{url_for('admin.create_post')}}" method="POST">
+    {{form.hidden_tag()}}  
+    title : {{ form.title }} <br>
+    summery :{{ form.summery }} <br>
+    slug : {{ form.slug }} <br> 
+    content : {{form.content}} <br>
+    category : {{form.category}} <br>
+    <input type="submit" value="submit">
+
+</form>
+{% endblock %}
