@@ -1,0 +1,29 @@
+{% extends 'admin/base.html' %}
+
+{% block page_content %}
+<P>list of users:</P>
+
+<table>
+    <caption>Users</caption>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User name</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td data-label="ID">{{user.id}}</td>
+            <td data-label="User name">{{user.full_name or '-'}}</td>
+            <td data-label="Email">{{user.email}}</td>
+            <td data-label="Role">{{'Admin' if user.role == 1 else 'User'}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

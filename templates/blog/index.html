@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} blogs {% endblock %}
+{% block page_content %}
+<h1>
+    hi it is a page for viewing blogs.
+</h1>
+{% for blog in blogs %}
+<div>
+    <h1><a href="{{url_for('blog.single_blog' , slug = blog.slug ) }}"> {{blog.title}} </a> </h1>
+    <P> {{blog.summery or blog.content | truncate (8 , True , '...') }} </P>
+
+</div>
+{% endfor %}
+
+{% endblock %}

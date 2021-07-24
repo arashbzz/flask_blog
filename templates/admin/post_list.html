@@ -1,0 +1,27 @@
+{% extends 'admin/base.html' %}
+
+{% block page_content %}
+<P>list of posts:</P>
+
+<table>
+    <caption>Users</caption>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td data-label="ID">{{post.id}}</td>
+            <td data-label="Title"> <a href="{{url_for('admin.single_post_viewing', slug = post.slug)}}">{{post.title}}</a></td>
+            <td><a href="{{url_for('admin.delete_post', id = post.id)}}" class="button">delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
